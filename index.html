@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<!-- SBK Patrol Center v3 (การ์ดใหญ่ขึ้น 15% จัดเรียง 4×2 สมดุล; v2: โลโก้ใหม่ + การ์ดกะทัดรัด) — v1 — แอปสำหรับ จนท.ตรวจการในศูนย์ (พัฒนาต่อจาก App Hub v6: พื้นหลังอนิเมชัน; v5: ใช้งานล่าสุดแบบชิปเล็ก; v4: การ์ดสีสด, Responsive, เอฟเฟคก่อนเข้า; v3: เพิ่ม OPS Shop Directory; v2: โหมดมืด/สว่าง, Splash, Auto-lock, ปักหมุด, เพิ่มแอปเอง) — รวมแอประบบปฏิบัติการ SBK ไว้ในไฟล์เดียว -->
+<!-- SBK Patrol Center v4 (โลโก้สีสดขึ้น ไม่มีขอบ ไอคอนเหมือนกันทุกแพลตฟอร์ม; v3: การ์ดใหญ่ขึ้น 15% จัดเรียง 4×2 สมดุล; v2: โลโก้ใหม่ + การ์ดกะทัดรัด) — v1 — แอปสำหรับ จนท.ตรวจการในศูนย์ (พัฒนาต่อจาก App Hub v6: พื้นหลังอนิเมชัน; v5: ใช้งานล่าสุดแบบชิปเล็ก; v4: การ์ดสีสด, Responsive, เอฟเฟคก่อนเข้า; v3: เพิ่ม OPS Shop Directory; v2: โหมดมืด/สว่าง, Splash, Auto-lock, ปักหมุด, เพิ่มแอปเอง) — รวมแอประบบปฏิบัติการ SBK ไว้ในไฟล์เดียว -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>SBK Patrol Center · จนท.ตรวจการ</title>
@@ -212,6 +212,8 @@ h1,h2,h3,.pf{font-family:'Prompt','Sarabun',sans-serif}
 .card .go{padding:9px 12px;border-radius:12px;font-size:.9rem}
 .star{right:8px;top:9px;font-size:1.2rem}
 .del{right:36px;top:12px}
+/* ===== v4: โลโก้ในหน้าเว็บมุมมนสัดส่วนเดียวกับไอคอนที่ติดตั้ง ===== */
+.logo{border-radius:22.5%}
 </style>
 </head>
 <body>
@@ -305,27 +307,25 @@ const $=id=>document.getElementById(id);
 let cat='ทั้งหมด',kw='',slowT=null;
 
 /* ===== 2. โลโก้แอป (SVG เดียว ใช้ทั้งหน้าเว็บ, favicon และไอคอนหน้าจอโฮม) ===== */
-const LOGO=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f46e5"/><stop offset=".55" stop-color="#7c3aed"/><stop offset="1" stop-color="#0d9488"/></linearGradient><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f46e5"/><stop offset="1" stop-color="#0d9488"/></linearGradient></defs><rect width="512" height="512" fill="url(#a)"/><circle cx="256" cy="256" r="238" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="5"/><circle cx="256" cy="256" r="200" fill="none" stroke="#fff" stroke-opacity=".13" stroke-width="4" stroke-dasharray="14 12"/><path d="M256 106L388 156V260C388 344 330 404 256 434C182 404 124 344 124 260V156Z" fill="#000" opacity=".2"/><path d="M256 96L388 146V250C388 334 330 394 256 424C182 394 124 334 124 250V146Z" fill="#fff"/><path d="M256 180C222 180 198 205 198 238C198 280 256 332 256 332C256 332 314 280 314 238C314 205 290 180 256 180Z" fill="url(#b)"/><circle cx="256" cy="238" r="22" fill="#fde047"/><path d="M256 122L261 135.1L275 135.8L264.1 144.6L267.8 158.2L256 150.5L244.2 158.2L247.9 144.6L237 135.8L251 135.1Z" fill="#f59e0b"/></svg>`;
+const LOGO=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4338ca"/><stop offset=".5" stop-color="#7c3aed"/><stop offset="1" stop-color="#ec4899"/></linearGradient><radialGradient id="g1" cx=".12" cy=".9" r=".6"><stop offset="0" stop-color="#14b8a6" stop-opacity=".9"/><stop offset="1" stop-color="#14b8a6" stop-opacity="0"/></radialGradient><radialGradient id="g2" cx=".88" cy=".1" r=".5"><stop offset="0" stop-color="#fde047" stop-opacity=".75"/><stop offset="1" stop-color="#fde047" stop-opacity="0"/></radialGradient><linearGradient id="p" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6366f1"/><stop offset=".6" stop-color="#0ea5e9"/><stop offset="1" stop-color="#14b8a6"/></linearGradient><linearGradient id="r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#e0e7ff"/></linearGradient><linearGradient id="n" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fb7185"/><stop offset="1" stop-color="#f97316"/></linearGradient><linearGradient id="s" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fde047"/><stop offset="1" stop-color="#f59e0b"/></linearGradient><clipPath id="c"><path d="M256 96L394 146V252C394 338 334 400 256 430C178 400 118 338 118 252V146Z"/></clipPath></defs><rect width="512" height="512" fill="url(#a)"/><rect width="512" height="512" fill="url(#g1)"/><rect width="512" height="512" fill="url(#g2)"/><circle cx="66" cy="112" r="8" fill="#fde047"/><circle cx="450" cy="98" r="6" fill="#67e8f9"/><circle cx="446" cy="424" r="9" fill="#f9a8d4"/><circle cx="62" cy="418" r="6" fill="#fff"/><path d="M256 72L412 130V252C412 350 342 420 256 452C170 420 100 350 100 252V130Z" fill="#000" opacity=".22" transform="translate(0,10)"/><path d="M256 72L412 130V252C412 350 342 420 256 452C170 420 100 350 100 252V130Z" fill="url(#r)"/><path d="M256 96L394 146V252C394 338 334 400 256 430C178 400 118 338 118 252V146Z" fill="url(#p)"/><g clip-path="url(#c)"><circle cx="256" cy="236" r="104" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="5"/><circle cx="256" cy="236" r="150" fill="none" stroke="#fff" stroke-opacity=".2" stroke-width="5" stroke-dasharray="16 12"/><path d="M256 236L360 236A104 104 0 0 0 329.5 162.5Z" fill="#fff" opacity=".2"/></g><path d="M256 168C216 168 188 198 188 236C188 284 256 350 256 350C256 350 324 284 324 236C324 198 296 168 256 168Z" fill="url(#n)"/><circle cx="256" cy="236" r="26" fill="#fff"/><circle cx="256" cy="236" r="11" fill="url(#s)"/><path d="M256 121L260.7 133.5L274.1 134.1L263.6 142.5L267.2 155.4L256 148L244.8 155.4L248.4 142.5L237.9 134.1L251.3 133.5Z" fill="url(#s)"/></svg>`;
 $('logoBox').innerHTML=LOGO;
 
 /* สร้างไอคอน PNG จาก SVG แล้วผูกเข้ากับ favicon / apple-touch-icon / manifest
    ทำที่ runtime เพราะต้องการไฟล์เดียว; iOS อ่าน apple-touch-icon ตอนกด "เพิ่มไปยังหน้าจอโฮม" */
 function setupIcons(){
-  const svgUrl='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(LOGO);
-  $('favicon').href=svgUrl;
-  const img=new Image();
-  img.onload=()=>{
-    const mk=n=>{const c=document.createElement('canvas');c.width=c.height=n;c.getContext('2d').drawImage(img,0,0,n,n);return c.toDataURL('image/png')};
-    try{
-      const p180=mk(180),p192=mk(192),p512=mk(512);
-      $('touchicon').href=p180;
-      const m={name:'SBK Patrol Center · จนท.ตรวจการ',short_name:'SBK ตรวจการ',start_url:location.href.split('#')[0],scope:'./',display:'standalone',
-        background_color:'#eef2ff',theme_color:'#4f46e5',lang:'th',
-        icons:[{src:p192,sizes:'192x192',type:'image/png',purpose:'any maskable'},{src:p512,sizes:'512x512',type:'image/png',purpose:'any maskable'}]};
-      $('manifest').href=URL.createObjectURL(new Blob([JSON.stringify(m)],{type:'application/manifest+json'}));
-    }catch(e){console.warn('สร้างไอคอนไม่สำเร็จ',e)}
-  };
-  img.src=svgUrl;
+  const rounded=LOGO.replace('</defs>','<clipPath id="rc"><rect width="512" height="512" rx="116"/></clipPath></defs><g clip-path="url(#rc)">').replace('</svg>','</g></svg>');
+  const url=x=>'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(x);
+  $('favicon').href=url(rounded); // ไอคอนแท็บ: มุมมนโปร่งใส ไม่มีขอบสี่เหลี่ยม
+  const load=x=>new Promise((ok,no)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=no;i.src=url(x)});
+  const mk=(img,n)=>{const c=document.createElement('canvas');c.width=c.height=n;c.getContext('2d').drawImage(img,0,0,n,n);return c.toDataURL('image/png')};
+  Promise.all([load(LOGO),load(rounded)]).then(([sq,rd])=>{
+    $('touchicon').href=mk(sq,180); // iOS ตัดมุมเอง ต้องเป็นสี่เหลี่ยมเต็มภาพและไม่โปร่งใส (ไม่งั้นมุมเป็นสีดำ)
+    const m={name:'SBK Patrol Center · จนท.ตรวจการ',short_name:'SBK ตรวจการ',start_url:location.href.split('#')[0],scope:'./',display:'standalone',
+      background_color:'#eef2ff',theme_color:'#4f46e5',lang:'th',
+      icons:[{src:mk(rd,192),sizes:'192x192',type:'image/png',purpose:'any'},{src:mk(rd,512),sizes:'512x512',type:'image/png',purpose:'any'},
+             {src:mk(sq,192),sizes:'192x192',type:'image/png',purpose:'maskable'},{src:mk(sq,512),sizes:'512x512',type:'image/png',purpose:'maskable'}]};
+    $('manifest').href=URL.createObjectURL(new Blob([JSON.stringify(m)],{type:'application/manifest+json'}));
+  }).catch(e=>console.warn('สร้างไอคอนไม่สำเร็จ',e));
 }
 
 /* ===== 3. แสดงผลการ์ด ===== */
@@ -519,7 +519,7 @@ $('installBtn').onclick=()=>{
 /* ===== 9. เริ่มต้นระบบ ===== */
 function init(){
   applyTheme(store.get('sbk_hub_theme',matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
-  $('sLogo').innerHTML=LOGO.replace('id="a"','id="a2"').replace('url(#a)','url(#a2)').replace('id="b"','id="b2"').replace('url(#b)','url(#b2)');
+  $('sLogo').innerHTML=LOGO.replace(/id="(\w+)"/g,(m,x)=>'id="'+x+'2"').replace(/url\(#(\w+)\)/g,(m,x)=>'url(#'+x+'2)');
   tick();setInterval(tick,1000);setupIcons();render();
   const cols=['#a5b4fc','#5eead4','#fde047','#f9a8d4','#fff']; // ประกายลอยในหน้า Splash
   for(let k=0;k<22;k++){const p=document.createElement('i'),z=3+Math.random()*5;p.className='pt';
