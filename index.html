@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<!-- SBK Patrol Center v4 (โลโก้สีสดขึ้น ไม่มีขอบ ไอคอนเหมือนกันทุกแพลตฟอร์ม; v3: การ์ดใหญ่ขึ้น 15% จัดเรียง 4×2 สมดุล; v2: โลโก้ใหม่ + การ์ดกะทัดรัด) — v1 — แอปสำหรับ จนท.ตรวจการในศูนย์ (พัฒนาต่อจาก App Hub v6: พื้นหลังอนิเมชัน; v5: ใช้งานล่าสุดแบบชิปเล็ก; v4: การ์ดสีสด, Responsive, เอฟเฟคก่อนเข้า; v3: เพิ่ม OPS Shop Directory; v2: โหมดมืด/สว่าง, Splash, Auto-lock, ปักหมุด, เพิ่มแอปเอง) — รวมแอประบบปฏิบัติการ SBK ไว้ในไฟล์เดียว -->
+<!-- SBK Patrol Center v5 (เปลี่ยนแอปรายงานบุคลิกภาพเป็น Security-Personality-Report, พื้นหลังการ์ดเข้มขึ้น 30%; v4: โลโก้สีสดขึ้น ไม่มีขอบ ไอคอนเหมือนกันทุกแพลตฟอร์ม; v3: การ์ดใหญ่ขึ้น 15% จัดเรียง 4×2 สมดุล; v2: โลโก้ใหม่ + การ์ดกะทัดรัด) — v1 — แอปสำหรับ จนท.ตรวจการในศูนย์ (พัฒนาต่อจาก App Hub v6: พื้นหลังอนิเมชัน; v5: ใช้งานล่าสุดแบบชิปเล็ก; v4: การ์ดสีสด, Responsive, เอฟเฟคก่อนเข้า; v3: เพิ่ม OPS Shop Directory; v2: โหมดมืด/สว่าง, Splash, Auto-lock, ปักหมุด, เพิ่มแอปเอง) — รวมแอประบบปฏิบัติการ SBK ไว้ในไฟล์เดียว -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>SBK Patrol Center · จนท.ตรวจการ</title>
@@ -214,6 +214,9 @@ h1,h2,h3,.pf{font-family:'Prompt','Sarabun',sans-serif}
 .del{right:36px;top:12px}
 /* ===== v4: โลโก้ในหน้าเว็บมุมมนสัดส่วนเดียวกับไอคอนที่ติดตั้ง ===== */
 .logo{border-radius:22.5%}
+/* ===== v5: พื้นหลังการ์ดเข้มขึ้น 30% (ทึบแสงของสีขาว/สีโทนแอป ×1.3) ===== */
+.card{background:linear-gradient(160deg,var(--card) 30%,color-mix(in srgb,var(--c) 21%,transparent))}
+[data-theme=dark] .card{background:linear-gradient(160deg,#ffffff3b,#ffffff1c);background:linear-gradient(160deg,#ffffff3f 0%,#ffffff1e 55%,color-mix(in srgb,var(--c) 26%,transparent) 100%)}
 </style>
 </head>
 <body>
@@ -291,7 +294,7 @@ const APPS=[
  {id:'break',  name:'บันทึกเวลาพักพนักงาน', desc:'แบบฟอร์มบันทึกการพักของพนักงาน SBK Break Form', path:'SBK-Break-Form/', cat:'ฟอร์ม', ico:'☕', g:'linear-gradient(135deg,#f59e0b,#ef4444)', s:'#f59e0b66', c:'#d97706'},
  {id:'sci',    name:'SCI Form', desc:'แบบฟอร์มบันทึกข้อมูล SCI', path:'SCI_Form/', cat:'ฟอร์ม', ico:'📝', g:'linear-gradient(135deg,#6366f1,#8b5cf6)', s:'#6366f166', c:'#4f46e5'},
  {id:'ptest',  name:'แบบทดสอบบุคลิกภาพ', desc:'ฟอร์มตรวจ/ทดสอบบุคลิกภาพของเจ้าหน้าที่', path:'Form-Test-Personality/', cat:'ตรวจประเมิน', ico:'🧑‍💼', g:'linear-gradient(135deg,#ec4899,#a855f7)', s:'#ec489966', c:'#be185d'},
- {id:'preport',name:'รายงานบุคลิกภาพประจำวัน', desc:'Daily Personality Report สรุปผลรายวัน', path:'Daily-Personality-Report/', cat:'รายงาน', ico:'📊', g:'linear-gradient(135deg,#0ea5e9,#6366f1)', s:'#0ea5e966', c:'#0369a1'},
+ {id:'secpreport',name:'รายงานบุคลิกภาพ รปภ.', desc:'Security Personality Report สรุปผลบุคลิกภาพเจ้าหน้าที่ รปภ.', path:'Security-Personality-Report/', cat:'รายงาน', ico:'📊', g:'linear-gradient(135deg,#0ea5e9,#6366f1)', s:'#0ea5e966', c:'#0369a1'},
  {id:'incident',name:'แจ้งเหตุการณ์ / อุบัติเหตุ', desc:'บันทึกและแจ้งเหตุการณ์ผิดปกติหรืออุบัติเหตุ', path:'From-Incident-Accident/', cat:'ฟอร์ม', ico:'🚨', g:'linear-gradient(135deg,#ef4444,#f97316)', s:'#ef444466', c:'#dc2626'},
  {id:'tenant', name:'ตรวจความปลอดภัยร้านค้า', desc:'Tenant Safety Inspection ตรวจประเมินมาตรฐานร้านค้าผู้เช่า', path:'Tenant_Safety_Inspection_v2/', cat:'ตรวจประเมิน', ico:'🛡️', g:'linear-gradient(135deg,#10b981,#0d9488)', s:'#10b98166', c:'#047857'},
  {id:'toilet', name:'ตรวจเช็คห้องน้ำ', desc:'บันทึกการตรวจความสะอาดห้องน้ำประจำวัน', path:'Toilet-Inspection-Form/', cat:'ตรวจประเมิน', ico:'🚻', g:'linear-gradient(135deg,#06b6d4,#3b82f6)', s:'#06b6d466', c:'#0e7490'},
